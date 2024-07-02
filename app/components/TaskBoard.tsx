@@ -37,45 +37,50 @@ export default function TaskBoard() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen max-w-screen-xl w-full">
-      <div className="p-4">
-        <AnimatePresence>
-          {tasks.map((task) => (
-            <motion.div
-              key={task.id}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Task key={task.id} task={task} deleteTask={deleteTask} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+    <div className="flex max-w-screen-3xl w-full">
+      <div className="flex flex-col min-h-screen bg-white shadow-xl rounded-lg w-96">
+        <div className="p-4 overflow-auto h-full ">
+          <AnimatePresence>
+            {tasks.map((task) => (
+              <motion.div
+                key={task.id}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Task key={task.id} task={task} deleteTask={deleteTask} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        <div className="mt-auto p-4">
+            <form onSubmit={addTask} className="flex flex-col items-center">
+              <input
+                type="text"
+                value={newTaskTitle}
+                onChange={(e) => setNewTaskTitle(e.target.value)}
+                className="shadow-sm p-2 mb-2 rounded-lg w-full"
+                placeholder="Task Title"
+              />
+              <input
+                type="text"
+                value={newTaskDescription}
+                onChange={(e) => setNewTaskDescription(e.target.value)}
+                className="shadow-sm p-2 mb-2 rounded-lg w-full"
+                placeholder="Task Description"
+              />
+              <button
+                type="submit"
+                className="shadow-sm p-4 bg-cool-gray text-white rounded-lg w-full"
+              >
+                Add Task
+              </button>
+            </form>
+          </div>
       </div>
-      <div className="mt-auto p-4">
-        <form onSubmit={addTask} className="flex flex-col items-center">
-          <input
-            type="text"
-            value={newTaskTitle}
-            onChange={(e) => setNewTaskTitle(e.target.value)}
-            className="shadow-sm p-2 mb-2 rounded-lg w-full"
-            placeholder="Task Title"
-          />
-          <input
-            type="text"
-            value={newTaskDescription}
-            onChange={(e) => setNewTaskDescription(e.target.value)}
-            className="shadow-sm p-2 mb-2 rounded-lg w-full"
-            placeholder="Task Description"
-          />
-          <button
-            type="submit"
-            className="shadow-sm p-4 bg-cool-gray text-white rounded-lg hover:outline-cool-gray duration-100 w-full"
-          >
-            Add Task
-          </button>
-        </form>
+      <div>
+        
       </div>
     </div>
   );

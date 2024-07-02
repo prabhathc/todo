@@ -2,8 +2,10 @@ import TaskBoard from "./components/TaskBoard";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-french-gray">
-      <TaskBoard />
+    <main className="min-h-screen bg-french-gray">
+      <div className="flex flex-col items-center justify-center">
+        <TaskBoard />
+      </div>
     </main>
   );
 }

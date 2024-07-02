@@ -45,6 +45,7 @@ export default function TaskBoard() {
       id: nextTaskId,
       title: newTaskTitle || "New Task",
       description: newTaskDescription || "Do the task",
+      pinned: false,
     };
 
     setTasks([...tasks, newTask]);
@@ -57,9 +58,19 @@ export default function TaskBoard() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
+  const togglePin = (taskId: number) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, pinned: !task.pinned } : task
+      )
+    );
+  };
+
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const sortedTasks = [...tasks].sort((a, b) => (a.pinned === b.pinned ? 0 : a.pinned ? -1 : 1));
 
   return (
     <div className="flex max-w-screen-3xl max-h-screen w-full text-sm">
@@ -79,7 +90,7 @@ export default function TaskBoard() {
           </button>
         </div>
         <div className="overflow-auto h-full">
-          {tasks.map((task) => (
+          {sortedTasks.map((task) => (
             <motion.div
               onClick={() => setSelectedTask(task)}
               key={task.id}
@@ -94,7 +105,13 @@ export default function TaskBoard() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.1, type: "spring", bounce: 0.3 }}
             >
-              <Task key={task.id} task={task} deleteTask={deleteTask} isExpanded={isExpanded} />
+              <Task
+                key={task.id}
+                task={task}
+                deleteTask={deleteTask}
+                togglePin={togglePin}
+                isExpanded={isExpanded}
+              />
             </motion.div>
           ))}
         </div>

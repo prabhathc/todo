@@ -1,15 +1,21 @@
 import { TaskType } from "../types/types";
 import * as Icons from "@heroicons/react/24/outline";
+import * as FilledIcons from "@heroicons/react/24/solid";
 
 interface TaskProps {
   task: TaskType;
   deleteTask: Function;
+  togglePin: (id: number) => void;
   isExpanded: boolean;
 }
 
-export default function Task({ task, deleteTask, isExpanded }: TaskProps) {
+export default function Task({ task, deleteTask, togglePin, isExpanded }: TaskProps) {
   const handleDelete = () => {
     deleteTask(task.id);
+  };
+
+  const handleTogglePin = () => {
+    togglePin(task.id);
   };
 
   return (
@@ -25,8 +31,12 @@ export default function Task({ task, deleteTask, isExpanded }: TaskProps) {
         </div>
         {isExpanded && (
           <div className="flex flex-grow justify-end">
-            <button onClick={handleDelete} className="">
-              <Icons.StarIcon className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 duration-200" />
+            <button onClick={handleTogglePin} className="">
+              {task.pinned ? (
+                <FilledIcons.StarIcon className="w-6 h-6 text-yellow-500 opacity-100 duration-200" />
+              ) : (
+                <Icons.StarIcon className="w-6 h-6 text-white opacity-100 duration-200" />
+              )}
             </button>
           </div>
         )}

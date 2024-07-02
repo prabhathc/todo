@@ -37,17 +37,21 @@ export default function TaskBoard() {
   };
 
   return (
-    <div className="flex max-w-screen-3xl w-full">
-      <div className="flex flex-col min-h-screen bg-white shadow-xl rounded-lg w-96">
-        <div className="p-4 overflow-auto h-full ">
+    <div className="flex max-w-screen-3xl w-full text-sm">
+      <div className="flex flex-col min-h-screen bg-white shadow-xl rounded-r-lg overflow-hidden w-64">
+        <div className="overflow-auto h-full ">
           <AnimatePresence>
             {tasks.map((task) => (
               <motion.div
                 key={task.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto", transition: {
+                  type: "spring",
+                  bounce: 0.3,
+                  opacity: { delay: 0.1 },
+                }}}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.1, type: "spring", bounce: 0.3}}
               >
                 <Task key={task.id} task={task} deleteTask={deleteTask} />
               </motion.div>
@@ -60,14 +64,14 @@ export default function TaskBoard() {
                 type="text"
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
-                className="shadow-sm p-2 mb-2 rounded-lg w-full"
+                className="p-2 mb-2 rounded-lg w-full"
                 placeholder="Task Title"
               />
               <input
                 type="text"
                 value={newTaskDescription}
                 onChange={(e) => setNewTaskDescription(e.target.value)}
-                className="shadow-sm p-2 mb-2 rounded-lg w-full"
+                className="p-2 mb-2 rounded-lg w-full"
                 placeholder="Task Description"
               />
               <button

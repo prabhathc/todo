@@ -16,7 +16,8 @@ const config: Config = {
       colors: {
         'french-gray': '#B8B8D1',
         'cool-gray': '#8083B3',
-        'light-gray': '#cdccd1'
+        'light-gray': '#cdccd1',
+        'med-gray': '#969FAB',
       }
     },
   },

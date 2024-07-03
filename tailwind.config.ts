@@ -14,10 +14,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        'french-gray': '#B8B8D1',
-        'cool-gray': '#8083B3',
-        'light-gray': '#cdccd1',
-        'med-gray': '#969FAB',
+        'french-gray': '#A8D1A8', // Light Green
+        'cool-gray': '#70B370',   // Medium Green
+        'light-gray': '#CCD1CC',  // Very Light Green
+        'med-gray': '#97AB97',    // Muted Green
       }
     },
   },
